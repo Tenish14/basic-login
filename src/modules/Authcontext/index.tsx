@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: Props) => {
   const signOut = () => {
     SignOutUser();
     setCurrentUser(null);
-    navigate("/");
+    navigate("/sign-in");
   };
 
   const value = {

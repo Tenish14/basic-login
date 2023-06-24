@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../firebase/firebase";
+import { AuthContext } from "../AuthContext";
 
 export default function SignUp(): JSX.Element {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
   const [emailId, setEmailId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/profile");
+    }
+  }, [currentUser]);
 
   const handleSignUpSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
     e
