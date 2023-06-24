@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../firebase/firebase";
 import { AuthContext } from "../AuthContext";
@@ -25,10 +26,19 @@ export default function SignUp(): JSX.Element {
       const userDetails = await createUser(emailId, password);
 
       if (userDetails) {
-        navigate("/sign-in");
+        navigate("/profile");
       }
     } catch (error: any) {
-      console.log("Create user failed", error.message);
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -75,6 +85,7 @@ export default function SignUp(): JSX.Element {
                 Sign In
               </Link>
             </div>
+            <ToastContainer />
           </div>
         </div>
       </div>

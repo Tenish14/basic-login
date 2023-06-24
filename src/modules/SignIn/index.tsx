@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { Form, Button } from "react-bootstrap";
 import { signInUser } from "../../firebase/firebase";
 
@@ -18,7 +19,16 @@ export default function SignIn(): JSX.Element {
         navigate("/profile");
       }
     } catch (error: any) {
-      console.log("User Sign In Failed", error.message);
+      toast.error(`User Sign In Failed ${error.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -27,7 +37,7 @@ export default function SignIn(): JSX.Element {
       <div className="row">
         <div className="col-md-12 d-flex align-items-center justify-content-center vh-100 w-100">
           <div className="border p-5">
-            <h2>Create new account</h2>
+            <h2>Login your account</h2>
             <Form>
               <Form.Group className="my-3 mx-2">
                 <Form.Label>Email address</Form.Label>
@@ -68,6 +78,7 @@ export default function SignIn(): JSX.Element {
                 Sign Up
               </Link>
             </div>
+            <ToastContainer />
           </div>
         </div>
       </div>
