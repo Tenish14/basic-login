@@ -15,7 +15,7 @@ export default function SignIn(): JSX.Element {
     try {
       const userCredential = await signInUser(emailId, password);
       if (userCredential) {
-        navigate("/");
+        navigate("/profile");
       }
     } catch (error: any) {
       console.log("User Sign In Failed", error.message);
